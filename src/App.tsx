@@ -14,6 +14,7 @@ import {
 import "./App.css";
 import axios, { AxiosResponse } from "axios";
 import { Launch } from "grommet-icons";
+
 function App() {
   const [running, setRunning] = useState(false);
   const [Advanced, setAdvanced] = useState(true);
@@ -34,6 +35,9 @@ function App() {
     setRes(res);
     setRunning(false);
   }
+  const genNew = (str: string) => {
+    return str.split("\n").map((e) => <p>{e}</p>);
+  };
   return (
     <div className="app">
       <Card width="large" background="light">
@@ -52,8 +56,8 @@ function App() {
             }}
           />
           <p>
-            <strong>{context}</strong>
-            {res ? res.data.text : null}
+            <strong>{res ? res.data.prompt : null}</strong>
+            {res ? genNew(res.data.text) : null}
           </p>
           <p>Advanced Options</p>
           <CheckBox
